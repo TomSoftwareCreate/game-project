@@ -1,0 +1,4 @@
+
+3D export
+ - based on collada format
+ - use the "Better Collada Exporter for Blender" (see downloads on Godot Engine website)
