@@ -5,9 +5,12 @@ duplicate = True
 ob = bpy.context.object
 
 bpy.ops.object.mode_set(mode = 'OBJECT') 
-#bpy.ops.object.select_all(action = 'DESELECT')
+bpy.ops.object.select_all(action = 'DESELECT')
 
-me = bpy.context.object.data
+me = ob.data
+
+print("------------")
+print("Generate")
 
 #-----------------------------------
 # Initialize vertex groups
@@ -36,9 +39,15 @@ for i in range(0, len(me.materials)):
 
 for mat in me.materials:
     print("Material: " + mat.name)
-    
+        
     if duplicate:
-        ob2 = ob.copy() # duplicate linked
+        old = bpy.context.scene.objects.get(mat.name)
+        if old is not None:
+            print("  deleting old version")
+            old.select = True
+            bpy.ops.object.delete()
+        
+        ob2 = ob.copy() # duplicate linked        
         ob2.data = ob.data.copy() # optional: make this a real duplicate (not linked)
         bpy.context.scene.objects.link(ob2) # add to scene
     
@@ -47,6 +56,13 @@ for mat in me.materials:
     
         # Set masking
         ob2.modifiers["Mask"].vertex_group = mat.name
+        
+        # And hide it
+        ob2.hide = True
     
     bpy.context.scene.update()
 
+
+#-----------------------------------
+# Reselect the base mesh object
+ob.select = True
