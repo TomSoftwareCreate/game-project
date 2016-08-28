@@ -18,14 +18,23 @@ func _ready():
 	my_set_material(get_node("p1"), mat)
 	
 	add_stuff("p1","helmet")
-	hide_stuff("p1","torso")
+	hide_stuff("p1","chest")
+	hide_stuff("p1","abdomen")
+	add_stuff("p1","armor")
 	
 	add_stuff("p2","boots")
-	hide_stuff("p2","lower_legs")
+	hide_stuff("p2","leg_lower")
+	add_stuff("p2","armor")
+	hide_stuff("p2","chest")
+	hide_stuff("p2","abdomen")
+	
 	
 	add_stuff("p3","helmet")
-	hide_stuff("p3","lower_legs")
+	hide_stuff("p3","leg_lower")
 	add_stuff("p3","boots")
+	hide_stuff("p3","chest")
+	hide_stuff("p3","abdomen")
+	add_stuff("p3","armor")
 	
 	get_node("p1/AnimationPlayer").play("loop_bow");
 	get_node("p2/AnimationPlayer").play("loop_walk");
